@@ -9,6 +9,7 @@ export interface Todo {
     completed: boolean;
     time?: string;
     project?: string;
+    completedAt?: string;
     createdAt: string;
 }
 
@@ -60,9 +61,17 @@ export const useTodoStore = create<TodoState>()(
                 })),
             toggleTodo: (id) =>
                 set((state) => ({
-                    todos: state.todos.map((todo) =>
-                        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-                    ),
+                    todos: state.todos.map((todo) => {
+                        if (todo.id === id) {
+                            const newCompleted = !todo.completed;
+                            return {
+                                ...todo,
+                                completed: newCompleted,
+                                completedAt: newCompleted ? new Date().toISOString() : undefined
+                            };
+                        }
+                        return todo;
+                    }),
                 })),
             deleteTodo: (id) =>
                 set((state) => ({

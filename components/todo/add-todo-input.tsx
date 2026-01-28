@@ -98,9 +98,9 @@ export function AddTodoInput() {
             <div className="flex justify-start">
                 <Button
                     onClick={() => setIsExpanded(true)}
-                    className="bg-[#5E51D0] hover:bg-[#4b41a8] text-white rounded-full px-6 transition-all shadow-sm gap-2"
+                    className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white rounded-full px-8 py-6 text-base font-semibold shadow-lg shadow-indigo-500/25 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] gap-2.5 group"
                 >
-                    <HugeiconsIcon icon={Add01Icon} className="size-5" />
+                    <HugeiconsIcon icon={Add01Icon} className="size-5 group-hover:rotate-90 transition-transform duration-300" />
                     New Task
                 </Button>
             </div>

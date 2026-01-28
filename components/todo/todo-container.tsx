@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTodoStore } from "@/store/todo-store";
 import { TodoItem } from "./todo-item";
 import { AddTodoInput } from "./add-todo-input";
+import { AnalyticsDashboard } from "../analytics/analytics-dashboard";
 import { cn } from "@/lib/utils";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Search01Icon, Sorting05Icon } from "@hugeicons/core-free-icons";
@@ -31,7 +32,7 @@ export function TodoContainer() {
     return (
         <div className="p-6 md:p-8 h-full flex flex-col w-full bg-[#121212] pb-20 text-zinc-100">
             {/* Header Section */}
-            <div className="mb-6 space-y-4 max-w-5xl mx-auto w-full">
+            <div className="mb-6 space-y-4 w-full">
                 {/* Search Bar */}
                 <div className="relative group">
                     <HugeiconsIcon icon={Search01Icon} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 size-5 transition-colors group-focus-within:text-zinc-300" />
@@ -83,7 +84,7 @@ export function TodoContainer() {
 
             <div className="flex-1 overflow-y-auto no-scrollbar pb-20 space-y-4">
 
-                <div className="space-y-3 max-w-5xl mx-auto w-full">
+                <div className="space-y-3 w-full">
                     {filteredTodos.map((todo) => (
                         <TodoItem key={todo.id} todo={todo} />
                     ))}
@@ -95,8 +96,14 @@ export function TodoContainer() {
                     )}
                 </div>
 
-                <div className="pt-4 sticky bottom-0 bg-[#121212] max-w-5xl mx-auto w-full">
-                    <AddTodoInput />
+                <div className="w-full pt-6">
+                    <AnalyticsDashboard />
+                </div>
+
+                <div className="pt-4 sticky bottom-0 w-full pointer-events-none">
+                    <div className="pointer-events-auto">
+                        <AddTodoInput />
+                    </div>
                 </div>
             </div>
         </div>
