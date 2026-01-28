@@ -22,6 +22,7 @@ import {
   ArrowUpRight01Icon,
   Note01Icon,
   CheckListIcon,
+  Delete02Icon,
 } from "@hugeicons/core-free-icons";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -260,10 +261,7 @@ export function CalendarSidebar({
                             }}
                           >
                             <span className="sr-only">Delete</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-3">
-                              <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.49 1.45 6.681 6.681 0 01-7.612-2.25h-1.378a2.25 2.25 0 01-2.25-2.25V4.75a2.25 2.25 0 012.25-2.25h1.378a2.25 2.25 0 012.25 2.25v.228zm0 4.036h2.863l-.26 13.918a2.25 2.25 0 01-2.247 2.208H6.604a2.25 2.25 0 01-2.247-2.208L4.096 8.514H6.75m9.75 0h-9.75" clipRule="evenodd" />
-                              <path d="M10 11a.75.75 0 01.75.75v6.5a.75.75 0 01-1.5 0v-6.5A.75.75 0 0110 11zM14 11a.75.75 0 01.75.75v6.5a.75.75 0 01-1.5 0v-6.5A.75.75 0 0114 11z" />
-                            </svg>
+                            <HugeiconsIcon icon={Delete02Icon} className="size-3" />
                           </Button>
                           <HugeiconsIcon
                             icon={SparklesIcon}
