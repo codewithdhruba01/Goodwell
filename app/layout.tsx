@@ -22,8 +22,11 @@ const patrickHand = Patrick_Hand({
 });
 
 export const metadata: Metadata = {
-  title: "Calendar - Square UI",
-  description: "A modern calendar application with event management",
+  title: "Goodwell",
+  description: "A modern calendar application for your team",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({

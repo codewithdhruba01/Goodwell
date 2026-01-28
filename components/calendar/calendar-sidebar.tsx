@@ -67,22 +67,20 @@ export function CalendarSidebar({
       <CreateJobDialog open={createJobOpen} onOpenChange={setCreateJobOpen} />
       <SidebarHeader className="pb-0">
         <div className="px-2 py-1.5">
-          <Link
-            href="https://square.lndev.me"
-            target="_blank"
-            className="flex items-center justify-between mb-4"
-          >
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <div className="size-9 shrink-0 bg-linear-to-br from-purple-500 to-pink-600 rounded-md shadow flex items-center justify-center text-white text-xs font-semibold border border-border">
-                SU
-              </div>
-              <div className="flex flex-col items-start">
-                <h1 className="font-semibold text-sm">Square UI</h1>
-                <div className="flex items-center gap-1">
-                  <HugeiconsIcon icon={Layers01Icon} className="size-3" />
-                  <span className="text-xs">4 workspaces</span>
-                </div>
-              </div>
+              {/* Light Mode Logo */}
+              <img
+                src="/goodwellDark.png"
+                alt="Goodwell"
+                className="h-8 w-auto dark:hidden"
+              />
+              {/* Dark Mode Logo */}
+              <img
+                src="/goodwellLight.png"
+                alt="Goodwell"
+                className="h-8 w-auto hidden dark:block"
+              />
             </div>
 
             <SignedIn>
@@ -96,7 +94,7 @@ export function CalendarSidebar({
                 <HugeiconsIcon icon={UserGroupIcon} className="size-4" />
               </Link>
             </SignedOut>
-          </Link>
+          </div>
           <div className="relative">
             <HugeiconsIcon
               icon={Search01Icon}
@@ -283,16 +281,6 @@ export function CalendarSidebar({
       </SidebarContent>
 
       <SidebarFooter className="p-4">
-        <Link
-          href="https://square.lndev.me"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button className="w-full">
-            square.lndev.me
-            <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />
-          </Button>
-        </Link>
 
         <div className="space-y-1 my-4">
           <SidebarMenu>
