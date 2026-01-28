@@ -19,8 +19,8 @@ export function ActivityGaugeComponent() {
     ];
 
     return (
-        <div className="bg-[#1E1E1E] p-6 rounded-3xl flex flex-col items-center justify-center min-h-[300px]">
-            <h3 className="text-zinc-400 text-sm font-medium mb-4 uppercase tracking-wider">Completion Rate</h3>
+        <div className="bg-card border border-border p-6 rounded-3xl flex flex-col items-center justify-center min-h-[300px] shadow-sm">
+            <h3 className="text-muted-foreground text-sm font-medium mb-4 uppercase tracking-wider">Completion Rate</h3>
             <div className="w-full h-[200px] relative">
                 <ResponsiveContainer width="100%" height="100%">
                     <RadialBarChart
@@ -45,18 +45,23 @@ export function ActivityGaugeComponent() {
                             cornerRadius={10}
                         />
                         <Tooltip
-                            contentStyle={{ backgroundColor: '#27272a', borderRadius: '8px', border: 'none', color: '#f4f4f5' }}
+                            contentStyle={{
+                                backgroundColor: 'var(--popover)',
+                                borderRadius: '8px',
+                                border: '1px solid var(--border)',
+                                color: 'var(--popover-foreground)'
+                            }}
                         />
                     </RadialBarChart>
                 </ResponsiveContainer>
 
                 {/* Center Text */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                    <span className="text-4xl font-bold text-white">{percentage}%</span>
-                    <span className="text-xs text-zinc-500 font-medium mt-1">DONE</span>
+                    <span className="text-4xl font-bold text-foreground">{percentage}%</span>
+                    <span className="text-xs text-muted-foreground font-medium mt-1">DONE</span>
                 </div>
             </div>
-            <div className="text-center mt-4 text-zinc-500 text-sm">
+            <div className="text-center mt-4 text-muted-foreground text-sm">
                 <p>{completed} / {total} Tasks Completed</p>
             </div>
         </div>

@@ -30,9 +30,28 @@ export function LineChartComponent() {
         };
     });
 
+    const CustomTooltip = ({ active, payload, label }: any) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="bg-popover border border-border p-3 rounded-xl shadow-lg outline-none">
+                    <p className="text-muted-foreground text-xs mb-1">{label}</p>
+                    {payload.map((entry: any, index: number) => (
+                        <div key={index} className="flex items-center gap-2 mb-0.5">
+                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.stroke }}></div>
+                            <span className="text-popover-foreground text-sm font-medium">
+                                {entry.name}: {entry.value}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+        return null;
+    };
+
     return (
-        <div className="bg-[#1E1E1E] p-6 rounded-3xl flex flex-col min-h-[300px] col-span-1">
-            <h3 className="text-zinc-400 text-sm font-medium mb-6 uppercase tracking-wider">Productivity Trends</h3>
+        <div className="bg-card border border-border p-6 rounded-3xl flex flex-col min-h-[300px] col-span-1 shadow-sm">
+            <h3 className="text-muted-foreground text-sm font-medium mb-6 uppercase tracking-wider">Productivity Trends</h3>
             <div className="w-full h-[300px] -ml-4">
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={data}>
@@ -42,32 +61,22 @@ export function LineChartComponent() {
                                 <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
                             </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#88888820" vertical={false} />
                         <XAxis
                             dataKey="name"
-                            stroke="#71717a"
+                            stroke="#888888"
                             fontSize={12}
                             tickLine={false}
                             axisLine={false}
                             dy={10}
                         />
                         <YAxis
-                            stroke="#71717a"
+                            stroke="#888888"
                             fontSize={12}
                             tickLine={false}
                             axisLine={false}
                         />
-                        <Tooltip
-                            contentStyle={{
-                                backgroundColor: '#18181b',
-                                borderRadius: '12px',
-                                border: '1px solid #27272a',
-                                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                                color: '#f4f4f5'
-                            }}
-                            itemStyle={{ fontSize: '12px' }}
-                            labelStyle={{ color: '#a1a1aa', marginBottom: '4px' }}
-                        />
+                        <Tooltip content={<CustomTooltip />} />
                         <Line
                             type="monotone"
                             dataKey="created"

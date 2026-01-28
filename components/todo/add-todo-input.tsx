@@ -108,24 +108,24 @@ export function AddTodoInput() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="border border-zinc-800 rounded-xl bg-[#1E1E1E] shadow-lg overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+        <form onSubmit={handleSubmit} className="border border-border rounded-xl bg-card shadow-lg hover:shadow-xl transition-shadow overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
             {/* Header / Title Input */}
-            <div className="p-4 border-b border-zinc-800">
+            <div className="p-4 border-b border-border">
                 <input
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     placeholder="Task Title"
-                    className="text-xl font-bold bg-transparent border-none outline-none placeholder:text-zinc-500 text-zinc-100 w-full"
+                    className="text-xl font-bold bg-transparent border-none outline-none placeholder:text-muted-foreground text-foreground w-full"
                     autoFocus
                 />
             </div>
 
             {/* Toolbar */}
-            <div className="flex items-center gap-1 px-2 py-1.5 border-b border-zinc-800 bg-[#252525] overflow-x-auto">
+            <div className="flex items-center gap-1 px-2 py-1.5 border-b border-border bg-muted/50 overflow-x-auto">
                 <ToolbarIcon icon={TextBoldIcon} onClick={() => insertFormat("**", "**")} />
                 <ToolbarIcon icon={TextItalicIcon} onClick={() => insertFormat("_", "_")} />
                 <ToolbarIcon icon={TextUnderlineIcon} onClick={() => insertFormat("<u>", "</u>")} />
-                <div className="w-px h-4 bg-zinc-700 mx-1" />
+                <div className="w-px h-4 bg-border mx-1" />
                 <ToolbarIcon icon={Link01Icon} onClick={handleLink} />
                 <ToolbarIcon icon={QuoteDownIcon} onClick={() => insertFormat("> ")} />
                 <ToolbarIcon icon={ListSettingIcon} onClick={() => insertFormat("- ")} />
@@ -138,17 +138,17 @@ export function AddTodoInput() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Add extra details or description..."
-                    className="w-full h-full min-h-[100px] bg-transparent border-none outline-none resize-none text-zinc-300 font-medium leading-relaxed placeholder:text-zinc-600"
+                    className="w-full h-full min-h-[100px] bg-transparent border-none outline-none resize-none text-muted-foreground font-medium leading-relaxed placeholder:text-muted-foreground/50"
                 />
             </div>
 
             {/* Meta & Actions Footer */}
-            <div className="bg-[#1E1E1E] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-zinc-800">
+            <div className="bg-card p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-border">
                 <div className="flex flex-wrap gap-2">
                     <Popover>
                         <PopoverTrigger
                             render={
-                                <button type="button" className={cn("flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors", date ? "text-[#5E51D0] bg-[#5E51D0]/10 border-[#5E51D0]/20" : "text-zinc-400 border-zinc-700 hover:bg-zinc-800")}>
+                                <button type="button" className={cn("flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors", date ? "text-primary bg-primary/10 border-primary/20" : "text-muted-foreground border-border hover:bg-accent")}>
                                     <HugeiconsIcon icon={Calendar01Icon} className="size-3.5" />
                                     {date ? format(date, "MMM d") : "Due Date"}
                                 </button>
@@ -167,7 +167,7 @@ export function AddTodoInput() {
                     <Popover>
                         <PopoverTrigger
                             render={
-                                <button type="button" className={cn("flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors", project ? "text-[#5E51D0] bg-[#5E51D0]/10 border-[#5E51D0]/20" : "text-zinc-400 border-zinc-700 hover:bg-zinc-800")}>
+                                <button type="button" className={cn("flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors", project ? "text-primary bg-primary/10 border-primary/20" : "text-muted-foreground border-border hover:bg-accent")}>
                                     <HugeiconsIcon icon={Tag01Icon} className="size-3.5" />
                                     {project || "Level / Label"}
                                 </button>
@@ -182,8 +182,8 @@ export function AddTodoInput() {
                                         type="button"
                                         onClick={() => setProject(label)}
                                         className={cn(
-                                            "w-full text-left text-sm px-2 py-1.5 rounded-md hover:bg-accent transition-colors flex items-center gap-2",
-                                            project === label && "bg-accent"
+                                            "w-full text-left text-sm px-2 py-1.5 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors flex items-center gap-2",
+                                            project === label && "bg-accent text-accent-foreground"
                                         )}
                                     >
                                         <HugeiconsIcon icon={Tag01Icon} className="size-3.5 text-muted-foreground" />
@@ -193,7 +193,7 @@ export function AddTodoInput() {
                                 <div className="mt-2 pt-2 border-t border-border">
                                     <input
                                         placeholder="Custom label..."
-                                        className="w-full bg-transparent text-sm outline-none px-2 py-1"
+                                        className="w-full bg-transparent text-sm outline-none px-2 py-1 text-foreground placeholder:text-muted-foreground"
                                         value={project}
                                         onChange={(e) => setProject(e.target.value)}
                                     />
@@ -207,14 +207,14 @@ export function AddTodoInput() {
                     <button
                         type="button"
                         onClick={() => setIsExpanded(false)}
-                        className="px-4 py-2 rounded-full text-sm font-medium text-zinc-400 hover:text-zinc-200 transition-colors"
+                        className="px-4 py-2 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                     >
                         Cancel
                     </button>
                     <button
                         type="submit"
                         disabled={!text.trim()}
-                        className="px-6 py-2 rounded-full text-sm font-bold text-white bg-[#5E51D0] hover:bg-[#4b41a8] shadow-md shadow-[#5E51D0]/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                        className="px-6 py-2 rounded-full text-sm font-bold text-primary-foreground bg-primary hover:bg-primary/90 shadow-md shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     >
                         Add this task
                     </button>
@@ -229,7 +229,7 @@ function ToolbarIcon({ icon: Icon, onClick }: { icon: any, onClick?: () => void 
         <button
             type="button"
             onClick={onClick}
-            className="p-1.5 rounded text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/50 dark:hover:bg-zinc-800 transition-colors"
+            className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
         >
             <HugeiconsIcon icon={Icon} className="size-4" strokeWidth={2} />
         </button>

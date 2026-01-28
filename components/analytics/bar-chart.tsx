@@ -25,31 +25,44 @@ export function BarChartComponent() {
         };
     });
 
+    const CustomTooltip = ({ active, payload, label }: any) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="bg-popover border border-border p-2 rounded-lg shadow-md outline-none">
+                    <p className="text-popover-foreground text-sm font-medium mb-1">{label}</p>
+                    {payload.map((entry: any, index: number) => (
+                        <p key={index} className="text-xs" style={{ color: entry.fill }}>
+                            {entry.name}: {entry.value}
+                        </p>
+                    ))}
+                </div>
+            );
+        }
+        return null;
+    };
+
     return (
-        <div className="bg-[#1E1E1E] p-6 rounded-3xl flex flex-col min-h-[300px] col-span-1">
-            <h3 className="text-zinc-400 text-sm font-medium mb-6 uppercase tracking-wider">Weekly Activity</h3>
+        <div className="bg-card border border-border p-6 rounded-3xl flex flex-col min-h-[300px] col-span-1 shadow-sm">
+            <h3 className="text-muted-foreground text-sm font-medium mb-6 uppercase tracking-wider">Weekly Activity</h3>
             <div className="w-full h-[250px] -ml-4">
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={data}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#88888820" vertical={false} />
                         <XAxis
                             dataKey="name"
-                            stroke="#71717a"
+                            stroke="#888888"
                             fontSize={12}
                             tickLine={false}
                             axisLine={false}
                             dy={10}
                         />
                         <YAxis
-                            stroke="#71717a"
+                            stroke="#888888"
                             fontSize={12}
                             tickLine={false}
                             axisLine={false}
                         />
-                        <Tooltip
-                            contentStyle={{ backgroundColor: '#27272a', borderRadius: '8px', border: 'none', color: '#f4f4f5' }}
-                            cursor={{ fill: '#2a2a2a' }}
-                        />
+                        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
                         <Bar dataKey="added" fill="#3b82f6" radius={[4, 4, 0, 0]} stackId="a" name="Added" />
                         <Bar dataKey="completed" fill="#8b5cf6" radius={[4, 4, 0, 0]} stackId="a" name="Completed" />
                     </BarChart>

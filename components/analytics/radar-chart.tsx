@@ -27,25 +27,36 @@ export function RadarChartComponent() {
         if (!data.find(d => d.subject === "Health")) data.push({ subject: "Health", A: 0, fullMark: 10 });
     }
 
+    const CustomTooltip = ({ active, payload, label }: any) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="bg-popover border border-border p-2 rounded-lg shadow-md outline-none">
+                    <p className="text-popover-foreground text-sm font-medium mb-1">{label}</p>
+                    <p className="text-xs text-primary">
+                        Tasks: {payload[0].value}
+                    </p>
+                </div>
+            );
+        }
+        return null;
+    };
+
     return (
-        <div className="bg-[#1E1E1E] p-6 rounded-3xl flex flex-col items-center justify-center min-h-[300px]">
-            <h3 className="text-zinc-400 text-sm font-medium mb-4 uppercase tracking-wider">Project Focus</h3>
+        <div className="bg-card border border-border p-6 rounded-3xl flex flex-col items-center justify-center min-h-[300px] shadow-sm">
+            <h3 className="text-muted-foreground text-sm font-medium mb-4 uppercase tracking-wider">Project Focus</h3>
             <div className="w-full h-[250px]">
                 <ResponsiveContainer width="100%" height="100%">
                     <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
-                        <PolarGrid stroke="#333" />
-                        <PolarAngleAxis dataKey="subject" tick={{ fill: '#71717a', fontSize: 12 }} />
-                        <Tooltip
-                            contentStyle={{ backgroundColor: '#27272a', borderRadius: '8px', border: 'none', color: '#f4f4f5' }}
-                            itemStyle={{ color: '#8884d8' }}
-                        />
+                        <PolarGrid stroke="#88888840" />
+                        <PolarAngleAxis dataKey="subject" tick={{ fill: '#888888', fontSize: 12 }} />
+                        <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#888888' }} />
                         <Radar
                             name="Tasks"
                             dataKey="A"
                             stroke="#8884d8"
                             strokeWidth={3}
                             fill="#8884d8"
-                            fillOpacity={0.3}
+                            fillOpacity={0.4}
                         />
                     </RadarChart>
                 </ResponsiveContainer>

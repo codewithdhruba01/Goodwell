@@ -62,7 +62,7 @@ export function TodoItem({ todo }: TodoItemProps) {
 
     return (
         <div
-            className="group relative flex items-start gap-4 p-5 bg-[#1C1C1E] rounded-[20px] transition-all hover:bg-[#252528] mb-3"
+            className="group relative flex items-start gap-4 p-5 bg-card rounded-[20px] transition-all hover:bg-accent/50 mb-4 border border-border shadow-sm hover:shadow-md"
         >
             {/* Right colored bar */}
             <div className={cn("absolute right-0 top-4 bottom-4 w-1.5 rounded-l-full", priorityStyle.bar)} />
@@ -83,8 +83,8 @@ export function TodoItem({ todo }: TodoItemProps) {
                 <div className="flex items-center justify-between gap-2">
                     <span
                         className={cn(
-                            "text-[17px] font-normal text-zinc-100 cursor-pointer select-none leading-snug relative",
-                            todo.completed && "text-zinc-500 line-through decoration-zinc-600"
+                            "text-[17px] font-normal text-foreground cursor-pointer select-none leading-snug relative",
+                            todo.completed && "text-muted-foreground line-through decoration-zinc-400 dark:decoration-white"
                         )}
                         onClick={() => toggleTodo(todo.id)}
                     >
@@ -93,7 +93,7 @@ export function TodoItem({ todo }: TodoItemProps) {
                     <Button
                         variant="ghost"
                         size="icon"
-                        className="opacity-0 group-hover:opacity-100 transition-opacity size-8 h-8 -mt-1 text-zinc-500 hover:text-red-400 hover:bg-neutral-800 rounded-full"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity size-8 h-8 -mt-1 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-full"
                         onClick={() => deleteTodo(todo.id)}
                     >
                         <HugeiconsIcon icon={Delete02Icon} className="size-4" />
@@ -102,17 +102,17 @@ export function TodoItem({ todo }: TodoItemProps) {
 
                 {/* Description - Basic Markdown Rendering */}
                 {todo.description && !todo.completed && (
-                    <div className="text-sm text-zinc-400 leading-relaxed font-normal max-w-2xl whitespace-pre-wrap mt-0.5 mb-1.5">
+                    <div className="text-sm text-muted-foreground leading-relaxed font-normal max-w-2xl whitespace-pre-wrap mt-0.5 mb-1.5">
                         {todo.description.split(/(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\)|> .*?|\n- .*?)/g).map((part, i) => {
-                            if (part.startsWith("**") && part.endsWith("**")) return <strong key={i} className="font-bold text-zinc-200">{part.slice(2, -2)}</strong>;
-                            if (part.startsWith("_") && part.endsWith("_")) return <em key={i} className="italic text-zinc-300">{part.slice(1, -1)}</em>;
-                            if (part.startsWith("<u>") && part.endsWith("</u>")) return <u key={i} className="underline decoration-zinc-500 underline-offset-2">{part.slice(3, -4)}</u>;
+                            if (part.startsWith("**") && part.endsWith("**")) return <strong key={i} className="font-bold text-foreground">{part.slice(2, -2)}</strong>;
+                            if (part.startsWith("_") && part.endsWith("_")) return <em key={i} className="italic text-foreground">{part.slice(1, -1)}</em>;
+                            if (part.startsWith("<u>") && part.endsWith("</u>")) return <u key={i} className="underline decoration-muted-foreground underline-offset-2">{part.slice(3, -4)}</u>;
                             if (part.startsWith("[") && part.includes("](") && part.endsWith(")")) {
                                 const match = part.match(/\[(.*?)\]\((.*?)\)/);
-                                if (match) return <a key={i} href={match[2]} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline hover:no-underline font-medium">{match[1]}</a>;
+                                if (match) return <a key={i} href={match[2]} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:no-underline font-medium">{match[1]}</a>;
                             }
-                            if (part.startsWith("> ")) return <div key={i} className="border-l-2 border-zinc-600 pl-3 my-1 text-zinc-500 italic">{part.slice(2)}</div>;
-                            if (part.trim().startsWith("- ")) return <div key={i} className="flex gap-2 ml-1 my-0.5"><span className="text-zinc-500 text-[10px] mt-1.5">●</span><span>{part.trim().slice(2)}</span></div>;
+                            if (part.startsWith("> ")) return <div key={i} className="border-l-2 border-border pl-3 my-1 text-muted-foreground italic">{part.slice(2)}</div>;
+                            if (part.trim().startsWith("- ")) return <div key={i} className="flex gap-2 ml-1 my-0.5"><span className="text-muted-foreground text-[10px] mt-1.5">●</span><span>{part.trim().slice(2)}</span></div>;
                             return part;
                         })}
                     </div>
@@ -136,7 +136,7 @@ export function TodoItem({ todo }: TodoItemProps) {
                             </div>
                         )}
                         {todo.time && (
-                            <div className="flex items-center gap-1.5 text-xs text-zinc-500 font-medium shrink-0">
+                            <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium shrink-0">
                                 <HugeiconsIcon icon={Calendar01Icon} className="size-3.5" />
                                 <span>{todo.time}</span>
                             </div>

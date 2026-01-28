@@ -19,9 +19,22 @@ export function PieChartComponent() {
         data.push({ name: "No Data", value: 1, color: "#3f3f46" }); // Zinc-700
     }
 
+    const CustomTooltip = ({ active, payload }: any) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="bg-popover border border-border p-2 rounded-lg shadow-md outline-none">
+                    <p className="text-popover-foreground text-sm font-medium">
+                        {payload[0].name}: {payload[0].value}
+                    </p>
+                </div>
+            );
+        }
+        return null;
+    };
+
     return (
-        <div className="bg-[#1E1E1E] p-6 rounded-3xl flex flex-col items-center justify-center min-h-[300px]">
-            <h3 className="text-zinc-400 text-sm font-medium mb-4 uppercase tracking-wider">Status Overview</h3>
+        <div className="bg-card border border-border p-6 rounded-3xl flex flex-col items-center justify-center min-h-[300px] shadow-sm">
+            <h3 className="text-muted-foreground text-sm font-medium mb-4 uppercase tracking-wider">Status Overview</h3>
             <div className="w-full h-[250px]">
                 <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -37,14 +50,12 @@ export function PieChartComponent() {
                                 <Cell key={`cell-${index}`} fill={entry.color} />
                             ))}
                         </Pie>
-                        <Tooltip
-                            contentStyle={{ backgroundColor: '#27272a', borderRadius: '8px', border: 'none', color: '#f4f4f5' }}
-                        />
+                        <Tooltip content={<CustomTooltip />} />
                         <Legend
                             verticalAlign="bottom"
                             height={36}
                             iconType="circle"
-                            formatter={(value) => <span className="text-zinc-400 text-sm font-medium ml-1">{value}</span>}
+                            formatter={(value) => <span className="text-muted-foreground text-sm font-medium ml-1">{value}</span>}
                         />
                     </PieChart>
                 </ResponsiveContainer>
