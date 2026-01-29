@@ -39,6 +39,35 @@ export default function FilesPage() {
             <CalendarSidebar />
             <SidebarInset>
                 <div className="flex flex-col h-full bg-zinc-950 text-zinc-100 font-sans">
+                    {/* Header - Full Width */}
+                    <AppHeader
+                        showNotifications={false}
+                        showSignIn={false}
+                        className="py-5 md:py-5"
+                    >
+                        <div className="relative hidden md:block group">
+                            <HugeiconsIcon icon={Search01Icon} className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-500 group-hover:text-zinc-400 transition-colors" />
+                            <Input
+                                placeholder="Search files..."
+                                className="pl-9 bg-zinc-900 border-zinc-800 text-zinc-100 placeholder:text-zinc-500 w-64 focus-visible:ring-zinc-700 h-9 transition-colors group-hover:border-zinc-700"
+                            />
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="flex items-center bg-zinc-900 border border-zinc-800 rounded-lg p-1 gap-1">
+                                <Button variant="ghost" size="icon" className="size-7 rounded-md hover:bg-zinc-800 text-zinc-100 bg-zinc-800">
+                                    <HugeiconsIcon icon={GridViewIcon} className="size-4" />
+                                </Button>
+                                <Button variant="ghost" size="icon" className="size-7 rounded-md hover:bg-zinc-800 text-zinc-400 hover:text-zinc-100">
+                                    <HugeiconsIcon icon={FilterHorizontalIcon} className="size-4" />
+                                </Button>
+                            </div>
+                            <Button size="sm" className="hidden md:flex gap-2">
+                                <HugeiconsIcon icon={Upload02Icon} className="size-4" />
+                                Upload
+                            </Button>
+                        </div>
+                    </AppHeader>
+
                     {/* Main Container - Split View on Desktop */}
                     <div className="flex flex-1 overflow-hidden">
 
@@ -46,47 +75,13 @@ export default function FilesPage() {
                         <div className="flex-1 flex flex-col min-w-0 overflow-y-auto p-6 md:p-8 space-y-8">
 
                             {/* Header */}
-                            <AppHeader
-                                breadcrumbs={
-                                    <div className="flex items-center gap-2 text-sm">
-                                        <HugeiconsIcon icon={Home01Icon} className="size-4 text-zinc-500" />
-                                        <span className="text-zinc-500">/</span>
-                                        <span className="font-medium text-zinc-200">My Files</span>
-                                    </div>
-                                }
-                                centerContent={
-                                    <div className="flex items-center p-1 bg-zinc-900 border border-zinc-800 rounded-full shadow-sm">
-                                        <Button variant="ghost" size="icon" className="size-8 rounded-full text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800">
-                                            <HugeiconsIcon icon={Upload02Icon} className="size-4" />
-                                        </Button>
-                                        <Button variant="ghost" size="icon" className="size-8 rounded-full text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800">
-                                            <HugeiconsIcon icon={FolderAddIcon} className="size-4" />
-                                        </Button>
-                                        <Button variant="ghost" size="icon" className="size-8 rounded-full text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800">
-                                            <HugeiconsIcon icon={Link01Icon} className="size-4" />
-                                        </Button>
-                                        <Button variant="ghost" size="icon" className="size-8 rounded-full text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800">
-                                            <HugeiconsIcon icon={FileAddIcon} className="size-4" />
-                                        </Button>
-                                    </div>
-                                }
-                            >
-                                <div className="relative hidden md:block">
-                                    <HugeiconsIcon icon={Search01Icon} className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-zinc-500" />
-                                    <Input
-                                        placeholder="Search files..."
-                                        className="pl-9 bg-zinc-900 border-zinc-800 text-zinc-100 placeholder:text-zinc-500 w-64 focus-visible:ring-zinc-700 h-9"
-                                    />
-                                </div>
-                                <div className="flex items-center bg-zinc-900 border border-zinc-800 rounded-lg p-0.5">
-                                    <Button variant="ghost" size="icon" className="size-8 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-100">
-                                        <HugeiconsIcon icon={GridViewIcon} className="size-4" />
-                                    </Button>
-                                    <Button variant="ghost" size="icon" className="size-8 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-100">
-                                        <HugeiconsIcon icon={FilterHorizontalIcon} className="size-4" />
-                                    </Button>
-                                </div>
-                            </AppHeader>
+                            {/* Header */}
+
+
+                            <div className="px-1">
+                                <h1 className="text-2xl font-semibold tracking-tight text-zinc-100">My Files</h1>
+                                <p className="text-zinc-400 text-sm">Manage your documents and assets.</p>
+                            </div>
 
                             {/* Storage Categories */}
                             <section>
