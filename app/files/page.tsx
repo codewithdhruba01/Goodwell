@@ -28,7 +28,8 @@ import {
     FolderAddIcon,
     Link01Icon,
     FileAddIcon,
-    Home01Icon
+    Home01Icon,
+    Add01Icon
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { cn } from "@/lib/utils";
@@ -166,62 +167,63 @@ export default function FilesPage() {
                         </div>
 
                         {/* Right Panel - Info */}
-                        <div className="w-80 border-l border-zinc-800 bg-zinc-950/50 hidden xl:flex flex-col p-6 space-y-8">
-                            {/* Storage Overview */}
-                            <section className="space-y-4">
+                        <div className="w-80 border-l border-zinc-800 bg-zinc-950/50 hidden xl:flex flex-col p-6 space-y-6 overflow-y-auto">
+
+                            {/* Storage Overview Card */}
+                            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 space-y-6">
                                 <div className="flex items-center justify-between">
-                                    <h3 className="text-sm font-medium text-zinc-300">Storage Overview</h3>
-                                    <button className="text-xs text-purple-400 hover:text-purple-300">Upgrade</button>
+                                    <h3 className="text-base font-semibold text-zinc-100">Storage Overview</h3>
+                                    <button className="text-xs font-medium text-purple-400 hover:text-purple-300">Upgrade</button>
                                 </div>
-                                <div className="space-y-2">
-                                    <div className="flex justify-between text-xs text-zinc-500">
-                                        <span>8.9 GB of 15 GB used</span>
-                                        <span>59%</span>
-                                    </div>
-                                    <div className="h-2 w-full bg-zinc-800 rounded-full overflow-hidden flex">
+                                <div className="space-y-3">
+                                    <div className="h-3 w-full bg-zinc-800 rounded-full overflow-hidden flex">
                                         <div className="h-full bg-purple-500 w-[27%]" />
                                         <div className="h-full bg-pink-500 w-[36%]" />
                                         <div className="h-full bg-orange-500 w-[17%]" />
                                         <div className="h-full bg-emerald-500 w-[13%]" />
+                                        <div className="h-full bg-zinc-600 w-[7%]" />
+                                    </div>
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-zinc-400">8.9 GB of 15 GB used</span>
+                                        <span className="font-medium text-zinc-100">59%</span>
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-y-3 gap-x-2">
+                                <div className="grid grid-cols-2 gap-3">
                                     <LegendItem label="Images" size="2.4 GB" color="bg-purple-500" />
                                     <LegendItem label="Videos" size="3.2 GB" color="bg-pink-500" />
                                     <LegendItem label="Documents" size="1.5 GB" color="bg-orange-500" />
                                     <LegendItem label="Archives" size="1.2 GB" color="bg-emerald-500" />
-                                    <LegendItem label="Other" size="0.6 GB" color="bg-zinc-500" />
+                                    <LegendItem label="Other" size="0.6 GB" color="bg-zinc-600" />
                                 </div>
-                            </section>
+                            </div>
 
-                            <div className="h-px bg-zinc-800" />
-
-                            {/* Team Members */}
-                            <section className="space-y-4">
+                            {/* Team Members Card */}
+                            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 space-y-4">
                                 <div className="flex items-center justify-between">
-                                    <h3 className="text-sm font-medium text-zinc-300">Team Members</h3>
-                                    <span className="text-xs text-zinc-500">5 people</span>
+                                    <h3 className="text-base font-semibold text-zinc-100">Team Members</h3>
+                                    <span className="text-xs font-medium text-zinc-500">5 people</span>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <div className="flex -space-x-2">
-                                        <Avatar className="border-2 border-zinc-950 size-8"><AvatarImage src="https://i.pravatar.cc/150?u=1" /><AvatarFallback>JD</AvatarFallback></Avatar>
-                                        <Avatar className="border-2 border-zinc-950 size-8"><AvatarImage src="https://i.pravatar.cc/150?u=2" /><AvatarFallback>SM</AvatarFallback></Avatar>
-                                        <Avatar className="border-2 border-zinc-950 size-8"><AvatarImage src="https://i.pravatar.cc/150?u=3" /><AvatarFallback>KD</AvatarFallback></Avatar>
-                                        <Avatar className="border-2 border-zinc-950 size-8 bg-zinc-800 text-xs font-medium text-zinc-300 flex items-center justify-center">+1</Avatar>
+                                <div className="flex items-center gap-3">
+                                    <div className="flex -space-x-3">
+                                        <div className="size-10 rounded-full border-2 border-zinc-900 bg-gradient-to-br from-cyan-400 to-blue-500" />
+                                        <div className="size-10 rounded-full border-2 border-zinc-900 bg-gradient-to-br from-blue-500 to-purple-500" />
+                                        <div className="size-10 rounded-full border-2 border-zinc-900 bg-gradient-to-br from-purple-500 to-pink-500" />
+                                        <div className="size-10 rounded-full border-2 border-zinc-900 bg-gradient-to-br from-pink-500 to-rose-500" />
+                                        <div className="size-10 rounded-full border-2 border-zinc-900 bg-zinc-800 flex items-center justify-center text-xs font-medium text-zinc-400">
+                                            +1
+                                        </div>
                                     </div>
-                                    <Button size="icon" variant="outline" className="size-8 rounded-full border-zinc-700 bg-transparent hover:bg-zinc-800">
-                                        <HugeiconsIcon icon={Share01Icon} className="size-3" />
-                                    </Button>
+                                    <button className="size-10 rounded-xl border border-zinc-700/50 bg-zinc-800/50 flex items-center justify-center text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors">
+                                        <HugeiconsIcon icon={Add01Icon} className="size-5" />
+                                    </button>
                                 </div>
-                            </section>
+                            </div>
 
-                            <div className="h-px bg-zinc-800" />
-
-                            {/* Recent Activity */}
-                            <section className="space-y-4 flex-1 overflow-hidden flex flex-col">
-                                <div className="flex items-center justify-between">
-                                    <h3 className="text-sm font-medium text-zinc-300">Recent Activity</h3>
-                                    <button className="text-xs text-zinc-500 hover:text-zinc-300">View all</button>
+                            {/* Recent Activity Card */}
+                            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 flex-1 flex flex-col min-h-0">
+                                <div className="flex items-center justify-between mb-6">
+                                    <h3 className="text-base font-semibold text-zinc-100">Recent Activity</h3>
+                                    <button className="text-xs font-medium text-zinc-500 hover:text-zinc-300">View all</button>
                                 </div>
                                 <div className="space-y-6 overflow-y-auto pr-2 custom-scrollbar">
                                     <ActivityItem
@@ -229,8 +231,9 @@ export default function FilesPage() {
                                         action="uploaded"
                                         target="Dashboard Mockup.fig"
                                         time="2 min ago"
-                                        icon={Download01Icon}
-                                        iconColor="text-emerald-400 bg-emerald-500/10"
+                                        icon={Upload02Icon}
+                                        iconColor="text-emerald-400"
+                                        avatarGradient="from-yellow-200 to-lime-500"
                                     />
                                     <ActivityItem
                                         user="Sarah Chen"
@@ -238,7 +241,8 @@ export default function FilesPage() {
                                         target="Brand Guidelines.pdf"
                                         time="15 min ago"
                                         icon={Share01Icon}
-                                        iconColor="text-blue-400 bg-blue-500/10"
+                                        iconColor="text-blue-400"
+                                        avatarGradient="from-cyan-300 to-blue-500"
                                     />
                                     <ActivityItem
                                         user="Alex Kim"
@@ -246,7 +250,8 @@ export default function FilesPage() {
                                         target="UI Components.sketch"
                                         time="1 hour ago"
                                         icon={PencilEdit02Icon}
-                                        iconColor="text-orange-400 bg-orange-500/10"
+                                        iconColor="text-amber-400"
+                                        avatarGradient="from-purple-400 to-indigo-500"
                                     />
                                     <ActivityItem
                                         user="Marie Dupont"
@@ -254,10 +259,38 @@ export default function FilesPage() {
                                         target="Product Demo.mp4"
                                         time="3 hours ago"
                                         icon={Download01Icon}
-                                        iconColor="text-purple-400 bg-purple-500/10"
+                                        iconColor="text-purple-400"
+                                        avatarGradient="from-fuchsia-400 to-pink-500"
+                                    />
+                                    <ActivityItem
+                                        user="James Wilson"
+                                        action="moved"
+                                        target="Client Presentation.pptx"
+                                        time="5 hours ago"
+                                        icon={Share01Icon}
+                                        iconColor="text-cyan-400"
+                                        avatarGradient="from-orange-200 to-amber-500"
+                                    />
+                                    <ActivityItem
+                                        user="Emma Taylor"
+                                        action="commented on"
+                                        target="App Icon.png"
+                                        time="Yesterday"
+                                        icon={PencilEdit02Icon}
+                                        iconColor="text-pink-400"
+                                        avatarGradient="from-pink-300 to-rose-500"
+                                    />
+                                    <ActivityItem
+                                        user="David Brown"
+                                        action="deleted"
+                                        target="Old Backup.zip"
+                                        time="Yesterday"
+                                        icon={Delete02Icon}
+                                        iconColor="text-red-400"
+                                        avatarGradient="from-lime-300 to-green-500"
                                     />
                                 </div>
-                            </section>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -329,31 +362,37 @@ function FileRow({ name, size, modified, created, icon: Icon, color }: any) {
 
 function LegendItem({ label, size, color }: any) {
     return (
-        <div className="flex items-center gap-2">
-            <div className={cn("size-2 rounded-full", color)} />
-            <div className="flex flex-col">
-                <span className="text-xs font-medium text-zinc-400">{label}</span>
-                <span className="text-[10px] text-zinc-600">{size}</span>
+        <div className="flex items-center gap-3 bg-zinc-950/30 p-2.5 rounded-xl border border-zinc-800/30">
+            <div className={cn("size-2.5 rounded-full shrink-0", color)} />
+            <div className="flex flex-col min-w-0">
+                <span className="text-xs font-medium text-zinc-300 truncate">{label}</span>
+                <span className="text-[10px] text-zinc-100 font-bold">{size}</span>
             </div>
         </div>
     );
 }
 
-function ActivityItem({ user, action, target, time, icon: Icon, iconColor }: any) {
+function ActivityItem({ user, action, target, time, icon: Icon, iconColor, avatarGradient }: any) {
     return (
-        <div className="flex gap-3">
-            <div className="relative">
-                <Avatar className="size-8 border-2 border-zinc-950"><AvatarImage src={`https://i.pravatar.cc/150?u=${user}`} /><AvatarFallback>U</AvatarFallback></Avatar>
-                <div className={cn("absolute -bottom-1 -right-1 size-4 rounded-full flex items-center justify-center border border-zinc-950", iconColor)}>
-                    <HugeiconsIcon icon={Icon} className="size-2.5" />
-                </div>
+        <div className="flex gap-4 group">
+            <div className="relative shrink-0">
+                <div className={cn("size-10 rounded-full bg-gradient-to-br", avatarGradient)} />
             </div>
-            <div className="flex flex-col min-w-0">
-                <p className="text-sm text-zinc-300">
-                    <span className="font-medium">{user}</span> <span className="text-zinc-500">{action}</span> <br />
-                    <span className="text-zinc-400 truncate block">{target}</span>
-                </p>
-                <span className="text-xs text-zinc-600 mt-0.5">{time}</span>
+            <div className="flex flex-col min-w-0 flex-1">
+                <div className="flex items-start justify-between gap-2">
+                    <p className="text-sm text-zinc-100 leading-snug">
+                        <span className="font-semibold">{user}</span> <span className="text-zinc-500">{action}</span> <br />
+                        <span className="text-zinc-500 truncate block text-xs mt-0.5">{target}</span>
+                    </p>
+                    <div className="flex flex-col items-end gap-1 shrink-0">
+                        <div className={cn("p-1.5 rounded-lg bg-zinc-800/50 group-hover:bg-zinc-800 transition-colors", iconColor)}>
+                            <HugeiconsIcon icon={Icon} className="size-3.5" />
+                        </div>
+                    </div>
+                </div>
+                <div className="flex justify-end mt-1">
+                    <span className="text-[10px] text-zinc-600">{time}</span>
+                </div>
             </div>
         </div>
     );
