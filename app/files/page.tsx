@@ -239,7 +239,7 @@ export default function FilesPage() {
                                 <div className="flex items-center justify-between mb-4">
                                     <h2 className="text-lg font-medium text-zinc-400">All Files</h2>
                                 </div>
-                                <div className="bg-zinc-900/50 rounded-xl border border-zinc-800/50 overflow-hidden">
+                                <div className="bg-[#0A0A0B] rounded-2xl border border-zinc-800 overflow-hidden shadow-sm">
                                     <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-4 p-4 text-xs font-medium text-zinc-500 border-b border-zinc-800 uppercase tracking-wider">
                                         <div className="w-8"></div>
                                         <div>Name</div>
@@ -248,7 +248,7 @@ export default function FilesPage() {
                                         <div className="w-32 text-right">Created</div>
                                         <div className="w-10"></div>
                                     </div>
-                                    <div className="divide-y divide-zinc-800/50">
+                                    <div className="divide-y divide-zinc-800">
                                         <FileRow name="Dashboard Mockup.fig" size="12.4 MB" modified="2 hours ago" created="Dec 15, 2024" icon={Image01Icon} color="text-purple-400" />
                                         <FileRow name="Brand Guidelines.pdf" size="8.2 MB" modified="Yesterday" created="Dec 10, 2024" icon={File02Icon} color="text-orange-400" />
                                         <FileRow name="Product Demo.mp4" size="248 MB" modified="3 days ago" created="Dec 8, 2024" icon={VideoReplayIcon} color="text-pink-400" />
@@ -488,16 +488,16 @@ export default function FilesPage() {
 
 function StorageCard({ icon: Icon, label, amount, percentage, color, bg, barColor }: any) {
     return (
-        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex flex-col gap-3 hover:border-zinc-700 transition-colors">
-            <div className={cn("size-10 rounded-lg flex items-center justify-center", bg, color)}>
+        <div className="bg-[#0A0A0B] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 hover:bg-zinc-900 transition-colors shadow-sm">
+            <div className={cn("size-10 rounded-lg flex items-center justify-center border border-zinc-800/50", bg, color)}>
                 <HugeiconsIcon icon={Icon} className="size-5" />
             </div>
             <div>
                 <div className="font-medium text-sm text-zinc-200">{label}</div>
-                <div className="text-xs text-zinc-500">{amount}</div>
+                <div className="text-xs text-zinc-500 mt-0.5">{amount}</div>
             </div>
             <div className="mt-auto pt-2">
-                <div className="flex justify-between text-[10px] text-zinc-500 mb-1">
+                <div className="flex justify-between text-[10px] text-zinc-500 mb-2">
                     <span>Used</span>
                     <span>{percentage}%</span>
                 </div>
@@ -514,7 +514,7 @@ function FolderCard({ folder, onDelete, onRename }: { folder: Folder, onDelete: 
     const slug = folder.label.toLowerCase().replace(/ /g, "-");
 
     return (
-        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex flex-col gap-2 hover:bg-zinc-800/50 transition-colors group cursor-pointer relative">
+        <div className="bg-[#0A0A0B] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 hover:bg-zinc-900 transition-colors group cursor-pointer relative shadow-sm">
             <Link href={`/files/${slug}`} className="absolute inset-0 z-10" />
             <div className="flex items-start justify-between relative">
                 <HugeiconsIcon icon={Folder01Icon} className={cn("size-8 transition-colors", folder.color)} />
@@ -556,9 +556,9 @@ function FolderCard({ folder, onDelete, onRename }: { folder: Folder, onDelete: 
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="mt-2 text-left">
-                <div className="font-medium text-sm text-zinc-200 truncate">{folder.label}</div>
-                <div className="text-xs text-zinc-500">{folder.count} files • {folder.size}</div>
+            <div className="mt-1 text-left">
+                <div className="font-medium text-[13px] text-zinc-200 truncate leading-snug">{folder.label}</div>
+                <div className="text-[11px] text-zinc-500 mt-0.5">{folder.count} files • {folder.size}</div>
             </div>
         </div>
     );
