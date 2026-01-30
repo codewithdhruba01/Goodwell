@@ -70,7 +70,7 @@ Follow these steps to set up the project locally.
 
     Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 📂 Project Structure
+## Project Structure
 
 ```bash
 ├── app/                  # Application routes (Next.js App Router)
@@ -87,10 +87,10 @@ Follow these steps to set up the project locally.
 └── public/               # Static assets
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
