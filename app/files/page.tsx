@@ -309,48 +309,48 @@ export default function FilesPage() {
                             </div>
 
                             {/* Team Members Card */}
-                            <div className="bg-[#0A0A0B] border border-zinc-800 rounded-2xl p-6 space-y-6 shadow-sm">
+                            <div className="bg-[#0A0A0B] border border-zinc-800 rounded-2xl p-4 space-y-4 shadow-sm">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-[15px] font-semibold text-zinc-100">Team Members</h3>
                                     <span className="text-xs font-medium text-zinc-500">5 people</span>
                                 </div>
-                                <div className="flex items-center gap-3">
-                                    <div className="flex -space-x-3">
+                                <div className="flex items-center gap-2">
+                                    <div className="flex -space-x-2">
                                         <Tooltip>
                                             <TooltipTrigger>
-                                                <div className="size-10 rounded-full border-2 border-[#0A0A0B] bg-gradient-to-br from-cyan-400 to-blue-500 cursor-help" />
+                                                <div className="size-8 rounded-full border-2 border-[#0A0A0B] bg-gradient-to-br from-cyan-400 to-blue-500 cursor-help" />
                                             </TooltipTrigger>
                                             <TooltipContent>John Doe</TooltipContent>
                                         </Tooltip>
                                         <Tooltip>
                                             <TooltipTrigger>
-                                                <div className="size-10 rounded-full border-2 border-[#0A0A0B] bg-gradient-to-br from-blue-500 to-purple-500 cursor-help" />
+                                                <div className="size-8 rounded-full border-2 border-[#0A0A0B] bg-gradient-to-br from-blue-500 to-purple-500 cursor-help" />
                                             </TooltipTrigger>
                                             <TooltipContent>Jane Smith</TooltipContent>
                                         </Tooltip>
                                         <Tooltip>
                                             <TooltipTrigger>
-                                                <div className="size-10 rounded-full border-2 border-[#0A0A0B] bg-gradient-to-br from-purple-500 to-pink-500 cursor-help" />
+                                                <div className="size-8 rounded-full border-2 border-[#0A0A0B] bg-gradient-to-br from-purple-500 to-pink-500 cursor-help" />
                                             </TooltipTrigger>
                                             <TooltipContent>Mike Johnson</TooltipContent>
                                         </Tooltip>
                                         <Tooltip>
                                             <TooltipTrigger>
-                                                <div className="size-10 rounded-full border-2 border-[#0A0A0B] bg-gradient-to-br from-pink-500 to-rose-500 cursor-help" />
+                                                <div className="size-8 rounded-full border-2 border-[#0A0A0B] bg-gradient-to-br from-pink-500 to-rose-500 cursor-help" />
                                             </TooltipTrigger>
                                             <TooltipContent>Sarah Wilson</TooltipContent>
                                         </Tooltip>
                                         <Tooltip>
                                             <TooltipTrigger>
-                                                <div className="size-10 rounded-full border-2 border-[#0A0A0B] bg-zinc-800 flex items-center justify-center text-xs font-bold text-zinc-400 cursor-help">
+                                                <div className="size-8 rounded-full border-2 border-[#0A0A0B] bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-zinc-400 cursor-help">
                                                     +1
                                                 </div>
                                             </TooltipTrigger>
                                             <TooltipContent>And 1 more</TooltipContent>
                                         </Tooltip>
                                     </div>
-                                    <button className="size-10 rounded-xl border border-zinc-800 bg-zinc-900/50 flex items-center justify-center text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors">
-                                        <HugeiconsIcon icon={Add01Icon} className="size-5" />
+                                    <button className="size-8 rounded-full border border-zinc-800 bg-zinc-900/50 flex items-center justify-center text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors">
+                                        <HugeiconsIcon icon={Add01Icon} className="size-4" />
                                     </button>
                                 </div>
                             </div>
