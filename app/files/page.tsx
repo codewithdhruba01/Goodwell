@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { AppHeader } from "@/components/app-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -133,11 +135,21 @@ export default function FilesPage() {
                                     <h2 className="text-lg font-medium text-zinc-400">Folders</h2>
                                 </div>
                                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                                    <FolderCard label="Design Assets" count={24} size="1.2 GB" color="text-purple-400" />
-                                    <FolderCard label="Projects" count={18} size="856 MB" color="text-blue-400" />
-                                    <FolderCard label="Documents" count={45} size="234 MB" color="text-orange-400" />
-                                    <FolderCard label="Media" count={67} size="4.5 GB" color="text-pink-400" />
-                                    <FolderCard label="Archives" count={12} size="2.1 GB" color="text-emerald-400" />
+                                    <Link href="/files/design-assets">
+                                        <FolderCard label="Design Assets" count={24} size="1.2 GB" color="text-purple-400" />
+                                    </Link>
+                                    <Link href="/files/projects">
+                                        <FolderCard label="Projects" count={18} size="856 MB" color="text-blue-400" />
+                                    </Link>
+                                    <Link href="/files/documents">
+                                        <FolderCard label="Documents" count={45} size="234 MB" color="text-orange-400" />
+                                    </Link>
+                                    <Link href="/files/media">
+                                        <FolderCard label="Media" count={67} size="4.5 GB" color="text-pink-400" />
+                                    </Link>
+                                    <Link href="/files/archives">
+                                        <FolderCard label="Archives" count={12} size="2.1 GB" color="text-emerald-400" />
+                                    </Link>
                                 </div>
                             </section>
 
@@ -174,7 +186,7 @@ export default function FilesPage() {
                             <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 space-y-6">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-base font-semibold text-zinc-100">Storage Overview</h3>
-                                    <button className="text-xs font-medium text-purple-400 hover:text-purple-300">Upgrade</button>
+                                    <Link href="/plans" className="text-xs font-medium text-purple-400 hover:text-purple-300">Upgrade</Link>
                                 </div>
                                 <div className="space-y-3">
                                     <div className="h-3 w-full bg-zinc-800 rounded-full overflow-hidden flex">
