@@ -50,7 +50,7 @@ export function CalendarControls() {
     eventTypeFilter !== "all" || participantsFilter !== "all";
 
   return (
-    <div className="px-3 md:px-6 py-4 border-b border-border">
+    <div suppressHydrationWarning className="px-3 md:px-6 py-4 border-b border-border">
       <div className="flex items-center gap-2 md:gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[200px] max-w-[280px] shrink-0">
           <HugeiconsIcon
