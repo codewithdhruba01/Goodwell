@@ -250,7 +250,10 @@ export function CalendarSidebar({
                 <SidebarMenu>
                   {jobs.map((job) => (
                     <SidebarMenuItem key={job.id}>
-                      <SidebarMenuButton className="h-[26px] text-xs text-zinc-950 dark:text-muted-foreground hover:bg-neutral-100/50 dark:hover:bg-muted/50 hover:text-zinc-950 dark:hover:text-foreground group/item">
+                      <SidebarMenuButton
+                        render={<div />}
+                        className="h-[26px] text-xs text-zinc-950 dark:text-muted-foreground hover:bg-neutral-100/50 dark:hover:bg-muted/50 hover:text-zinc-950 dark:hover:text-foreground group/item"
+                      >
                         <HugeiconsIcon icon={FileEditIcon} className="size-4" />
                         <span>{job.title}</span>
                         <div className="ml-auto flex items-center gap-1 opacity-100 lg:opacity-0 group-hover/item:opacity-100 transition-opacity">
