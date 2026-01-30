@@ -67,11 +67,9 @@ interface Folder {
     color: string;
 }
 
-interface TeamMember {
-    id: string;
-    name: string;
-    gradient: string;
-}
+import { StorageOverview } from "@/components/files/storage-overview";
+import { TeamMembers, TeamMember } from "@/components/files/team-members";
+import { RecentActivity } from "@/components/files/recent-activity";
 
 const GRADIENTS = [
     "bg-gradient-to-br from-cyan-400 to-blue-500",
@@ -327,157 +325,20 @@ export default function FilesPage() {
                         <div className="w-96 border-l border-border bg-muted/10 hidden xl:flex flex-col p-6 space-y-6 overflow-y-auto">
 
                             {/* Storage Overview Card */}
-                            <div className="bg-card border border-border rounded-2xl p-6 space-y-6 shadow-sm">
-                                <div className="flex items-center justify-between">
-                                    <h3 className="text-[15px] font-semibold text-card-foreground">Storage Overview</h3>
-                                    <Link href="/plans" className="text-xs font-medium text-purple-400 hover:text-purple-300 transition-colors">Upgrade</Link>
-                                </div>
-                                <div className="space-y-4">
-                                    <div className="h-2.5 w-full bg-muted/50 rounded-full overflow-hidden flex">
-                                        <div className="h-full bg-purple-500 w-[27%]" />
-                                        <div className="h-full bg-pink-500 w-[36%]" />
-                                        <div className="h-full bg-orange-500 w-[17%]" />
-                                        <div className="h-full bg-emerald-500 w-[13%]" />
-                                        <div className="h-full bg-muted-foreground/30 w-[7%]" />
-                                    </div>
-                                    <div className="flex justify-between items-center text-sm">
-                                        <span className="text-muted-foreground text-[13px]">8.9 GB of 15 GB used</span>
-                                        <span className="font-bold text-card-foreground text-[15px]">59%</span>
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <LegendItem label="Images" size="2.4 GB" color="bg-purple-500" />
-                                    <LegendItem label="Videos" size="3.2 GB" color="bg-pink-500" />
-                                    <LegendItem label="Documents" size="1.5 GB" color="bg-orange-500" />
-                                    <LegendItem label="Archives" size="1.2 GB" color="bg-emerald-500" />
-                                    <LegendItem label="Other" size="0.6 GB" color="bg-muted-foreground/30" />
-                                </div>
-                            </div>
+                            <StorageOverview />
 
                             {/* Team Members Card */}
-                            <div className="bg-card border border-border rounded-2xl p-5 space-y-4 shadow-sm">
-                                <div className="flex items-center justify-between">
-                                    <h3 className="text-[15px] font-semibold text-foreground">Team Members</h3>
-                                    <span className="text-xs font-medium text-muted-foreground">{teamMembers.length} people</span>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="flex -space-x-3">
-                                        {teamMembers.length === 0 ? (
-                                            <div className="size-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs text-muted-foreground">
-                                                0
-                                            </div>
-                                        ) : (
-                                            <>
-                                                {teamMembers.slice(0, 4).map((member) => (
-                                                    <Tooltip key={member.id}>
-                                                        <TooltipTrigger>
-                                                            <div className={cn("size-10 rounded-full border-2 border-background cursor-pointer shadow-sm transition-transform hover:scale-105 hover:z-10", member.gradient)} />
-                                                        </TooltipTrigger>
-                                                        <TooltipContent>{member.name}</TooltipContent>
-                                                    </Tooltip>
-                                                ))}
-                                                {teamMembers.length > 4 && (
-                                                    <Tooltip>
-                                                        <TooltipTrigger>
-                                                            <div className="size-10 rounded-full border-2 border-background bg-zinc-800 text-zinc-400 flex items-center justify-center text-xs font-semibold cursor-pointer shadow-sm z-0">
-                                                                +{teamMembers.length - 4}
-                                                            </div>
-                                                        </TooltipTrigger>
-                                                        <TooltipContent>And {teamMembers.length - 4} more</TooltipContent>
-                                                    </Tooltip>
-                                                )}
-                                            </>
-                                        )}
-                                    </div>
-                                    <button
-                                        onClick={() => setIsAddMemberOpen(true)}
-                                        className="size-10 rounded-xl bg-zinc-800/50 hover:bg-zinc-800 border-2 border-transparent hover:border-zinc-700 flex items-center justify-center text-zinc-400 hover:text-zinc-200 transition-all active:scale-95"
-                                    >
-                                        <HugeiconsIcon icon={Add01Icon} className="size-5" />
-                                    </button>
-                                </div>
-                            </div>
+                            <TeamMembers members={teamMembers} onAddMember={() => setIsAddMemberOpen(true)} />
 
                             {/* Recent Activity Card */}
-                            <div className="bg-card border border-border rounded-2xl p-6 flex-1 flex flex-col min-h-0 shadow-sm">
-                                <div className="flex items-center justify-between mb-6">
-                                    <h3 className="text-[15px] font-semibold text-card-foreground">Recent Activity</h3>
-                                    <button className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">View all</button>
-                                </div>
-                                <div className="space-y-4 overflow-y-auto pr-2 custom-scrollbar">
-                                    <ActivityItem
-                                        user="Leonel Ngoya"
-                                        action="uploaded"
-                                        target="Dashboard Mockup.fig"
-                                        time="2 min ago"
-                                        icon={Upload02Icon}
-                                        iconColor="text-emerald-400"
-                                        avatarGradient="from-yellow-200 to-lime-500"
-                                    />
-                                    <ActivityItem
-                                        user="Sarah Chen"
-                                        action="shared"
-                                        target="Brand Guidelines.pdf"
-                                        time="15 min ago"
-                                        icon={Share01Icon}
-                                        iconColor="text-blue-400"
-                                        avatarGradient="from-cyan-300 to-blue-500"
-                                    />
-                                    <ActivityItem
-                                        user="Alex Kim"
-                                        action="edited"
-                                        target="UI Components.sketch"
-                                        time="1 hour ago"
-                                        icon={PencilEdit02Icon}
-                                        iconColor="text-amber-400"
-                                        avatarGradient="from-purple-400 to-indigo-500"
-                                    />
-                                    <ActivityItem
-                                        user="Marie Dupont"
-                                        action="downloaded"
-                                        target="Product Demo.mp4"
-                                        time="3 hours ago"
-                                        icon={Download01Icon}
-                                        iconColor="text-purple-400"
-                                        avatarGradient="from-fuchsia-400 to-pink-500"
-                                    />
-                                    <ActivityItem
-                                        user="James Wilson"
-                                        action="moved"
-                                        target="Client Presentation.pptx"
-                                        time="5 hours ago"
-                                        icon={Share01Icon}
-                                        iconColor="text-cyan-400"
-                                        avatarGradient="from-orange-200 to-amber-500"
-                                    />
-                                    <ActivityItem
-                                        user="Emma Taylor"
-                                        action="commented on"
-                                        target="App Icon.png"
-                                        time="Yesterday"
-                                        icon={PencilEdit02Icon}
-                                        iconColor="text-pink-400"
-                                        avatarGradient="from-pink-300 to-rose-500"
-                                    />
-                                    <ActivityItem
-                                        user="David Brown"
-                                        action="deleted"
-                                        target="Old Backup.zip"
-                                        time="Yesterday"
-                                        icon={Delete02Icon}
-                                        iconColor="text-red-400"
-                                        avatarGradient="from-lime-300 to-green-500"
-                                    />
-                                </div>
-                            </div>
+                            <RecentActivity />
                         </div>
                     </div>
                 </div>
-
-            </SidebarInset >
+            </SidebarInset>
 
             {/* Create Folder Dialog */}
-            < Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen} >
+            <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
                 <DialogContent className="sm:max-w-[425px] bg-background border-border text-foreground">
                     <DialogHeader>
                         <DialogTitle>Create New Folder</DialogTitle>
@@ -507,10 +368,10 @@ export default function FilesPage() {
                         <Button onClick={handleCreateFolder} className="bg-primary text-primary-foreground hover:bg-primary/90">Create Folder</Button>
                     </DialogFooter>
                 </DialogContent>
-            </Dialog >
+            </Dialog>
 
             {/* Rename Folder Dialog */}
-            < Dialog open={isRenameOpen} onOpenChange={setIsRenameOpen} >
+            <Dialog open={isRenameOpen} onOpenChange={setIsRenameOpen}>
                 <DialogContent className="sm:max-w-[425px] bg-background border-border text-foreground">
                     <DialogHeader>
                         <DialogTitle>Rename Folder</DialogTitle>
@@ -539,7 +400,7 @@ export default function FilesPage() {
                         <Button onClick={handleRenameFolder} className="bg-primary text-primary-foreground hover:bg-primary/90">Save Changes</Button>
                     </DialogFooter>
                 </DialogContent>
-            </Dialog >
+            </Dialog>
 
             {/* Add Member Dialog */}
             <Dialog open={isAddMemberOpen} onOpenChange={setIsAddMemberOpen}>
@@ -573,7 +434,7 @@ export default function FilesPage() {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </SidebarProvider >
+        </SidebarProvider>
     );
 }
 
@@ -743,35 +604,6 @@ function FileCard({ name, size, modified, icon: Icon, color }: any) {
                     <span className="text-[11px] text-muted-foreground">{size}</span>
                     <span className="text-[11px] text-muted-foreground">•</span>
                     <span className="text-[11px] text-muted-foreground">{modified}</span>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function LegendItem({ label, size, color }: any) {
-    return (
-        <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-                <div className={cn("size-2 rounded-full", color)} />
-                <span className="text-xs text-muted-foreground">{label}</span>
-            </div>
-            <span className="text-xs font-medium text-foreground">{size}</span>
-        </div>
-    );
-}
-
-function ActivityItem({ user, action, target, time, icon: Icon, iconColor, avatarGradient }: any) {
-    return (
-        <div className="flex items-start gap-3 group">
-            <div className={cn("size-8 rounded-full border-2 border-background bg-gradient-to-br shrink-0", avatarGradient)} />
-            <div className="flex-1 min-w-0 pt-0.5">
-                <div className="text-[13px] text-foreground leading-snug">
-                    <span className="font-semibold">{user}</span> <span className="text-muted-foreground">{action}</span> <span className="font-medium text-foreground">{target}</span>
-                </div>
-                <div className="flex items-center gap-1.5 mt-0.5">
-                    <HugeiconsIcon icon={Icon} className={cn("size-3.5", iconColor)} />
-                    <span className="text-[11px] text-muted-foreground">{time}</span>
                 </div>
             </div>
         </div>
