@@ -83,6 +83,8 @@ export default function FilesPage() {
     const [renameValue, setRenameValue] = useState("");
 
     // Handlers
+    const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
+
     const handleCreateFolder = () => {
         if (!newFolderName.trim()) return;
         const newFolder: Folder = {
@@ -135,10 +137,20 @@ export default function FilesPage() {
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="flex items-center bg-zinc-900 border border-zinc-800 rounded-lg p-1 gap-1">
-                                <Button variant="ghost" size="icon" className="size-7 rounded-md hover:bg-zinc-800 text-zinc-100 bg-zinc-800">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className={cn("size-7 rounded-md hover:bg-zinc-800 hover:text-zinc-100", viewMode === 'grid' ? "bg-zinc-800 text-zinc-100" : "text-zinc-400")}
+                                    onClick={() => setViewMode('grid')}
+                                >
                                     <HugeiconsIcon icon={GridViewIcon} className="size-4" />
                                 </Button>
-                                <Button variant="ghost" size="icon" className="size-7 rounded-md hover:bg-zinc-800 text-zinc-400 hover:text-zinc-100">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className={cn("size-7 rounded-md hover:bg-zinc-800 hover:text-zinc-100", viewMode === 'list' ? "bg-zinc-800 text-zinc-100" : "text-zinc-400")}
+                                    onClick={() => setViewMode('list')}
+                                >
                                     <HugeiconsIcon icon={FilterHorizontalIcon} className="size-4" />
                                 </Button>
                             </div>
@@ -239,24 +251,29 @@ export default function FilesPage() {
                                 <div className="flex items-center justify-between mb-4">
                                     <h2 className="text-lg font-medium text-zinc-400">All Files</h2>
                                 </div>
-                                <div className="bg-[#0A0A0B] rounded-2xl border border-zinc-800 overflow-hidden shadow-sm">
-                                    <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-4 p-4 text-xs font-medium text-zinc-500 border-b border-zinc-800 uppercase tracking-wider">
-                                        <div className="w-8"></div>
-                                        <div>Name</div>
-                                        <div className="w-24 text-right">Size</div>
-                                        <div className="w-32 text-right">Modified</div>
-                                        <div className="w-32 text-right">Created</div>
-                                        <div className="w-10"></div>
+                                {viewMode === 'list' ? (
+                                    <div className="bg-[#0A0A0B] rounded-2xl border border-zinc-800 overflow-hidden shadow-sm">
+                                        <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-4 p-4 text-xs font-medium text-zinc-500 border-b border-zinc-800 uppercase tracking-wider">
+                                            <div className="w-8"></div>
+                                            <div>Name</div>
+                                            <div className="w-24 text-right">Size</div>
+                                            <div className="w-32 text-right">Modified</div>
+                                            <div className="w-32 text-right">Created</div>
+                                            <div className="w-10"></div>
+                                        </div>
+                                        <div className="divide-y divide-zinc-800">
+                                            {ALL_FILES.map((file, i) => (
+                                                <FileRow key={i} {...file} />
+                                            ))}
+                                        </div>
                                     </div>
-                                    <div className="divide-y divide-zinc-800">
-                                        <FileRow name="Dashboard Mockup.fig" size="12.4 MB" modified="2 hours ago" created="Dec 15, 2024" icon={Image01Icon} color="text-purple-400" />
-                                        <FileRow name="Brand Guidelines.pdf" size="8.2 MB" modified="Yesterday" created="Dec 10, 2024" icon={File02Icon} color="text-orange-400" />
-                                        <FileRow name="Product Demo.mp4" size="248 MB" modified="3 days ago" created="Dec 8, 2024" icon={VideoReplayIcon} color="text-pink-400" />
-                                        <FileRow name="Client Presentation.pptx" size="15.7 MB" modified="1 week ago" created="Dec 1, 2024" icon={File01Icon} color="text-orange-400" />
-                                        <FileRow name="Source Code.zip" size="124 MB" modified="2 weeks ago" created="Nov 25, 2024" icon={ArchiveIcon} color="text-emerald-400" />
-                                        <FileRow name="UI Components.sketch" size="34.5 MB" modified="4 days ago" created="Dec 5, 2024" icon={Image01Icon} color="text-purple-400" />
+                                ) : (
+                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                                        {ALL_FILES.map((file, i) => (
+                                            <FileCard key={i} {...file} />
+                                        ))}
                                     </div>
-                                </div>
+                                )}
                             </section>
                         </div>
 
@@ -575,9 +592,78 @@ function FileRow({ name, size, modified, created, icon: Icon, color }: any) {
             <div className="w-32 text-right text-xs text-zinc-500">{modified}</div>
             <div className="w-32 text-right text-xs text-zinc-500">{created}</div>
             <div className="w-10 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity">
-                <button className="text-zinc-500 hover:text-zinc-300 p-1">
-                    <HugeiconsIcon icon={MoreVerticalIcon} className="size-4" />
-                </button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="text-zinc-500 hover:text-zinc-300 p-1 cursor-pointer">
+                        <HugeiconsIcon icon={MoreVerticalIcon} className="size-4" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-48 bg-zinc-900 border-zinc-800">
+                        <DropdownMenuItem className="text-zinc-300 focus:bg-zinc-800 focus:text-zinc-100 gap-2 cursor-pointer">
+                            <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />
+                            Open
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-zinc-300 focus:bg-zinc-800 focus:text-zinc-100 gap-2 cursor-pointer">
+                            <HugeiconsIcon icon={Share05Icon} className="size-4" />
+                            Share
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-zinc-300 focus:bg-zinc-800 focus:text-zinc-100 gap-2 cursor-pointer">
+                            <HugeiconsIcon icon={Edit02Icon} className="size-4" />
+                            Rename
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-red-400 focus:bg-red-500/10 focus:text-red-400 gap-2 cursor-pointer">
+                            <HugeiconsIcon icon={Delete01Icon} className="size-4" />
+                            Delete
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
+        </div>
+    );
+}
+
+// Data
+const ALL_FILES = [
+    { name: "Dashboard Mockup.fig", size: "12.4 MB", modified: "2 hours ago", created: "Dec 15, 2024", icon: Image01Icon, color: "text-purple-400" },
+    { name: "Brand Guidelines.pdf", size: "8.2 MB", modified: "Yesterday", created: "Dec 10, 2024", icon: File02Icon, color: "text-orange-400" },
+    { name: "Product Demo.mp4", size: "248 MB", modified: "3 days ago", created: "Dec 8, 2024", icon: VideoReplayIcon, color: "text-pink-400" },
+    { name: "Client Presentation.pptx", size: "15.7 MB", modified: "1 week ago", created: "Dec 1, 2024", icon: File01Icon, color: "text-orange-400" },
+    { name: "Source Code.zip", size: "124 MB", modified: "2 weeks ago", created: "Nov 25, 2024", icon: ArchiveIcon, color: "text-emerald-400" },
+    { name: "UI Components.sketch", size: "34.5 MB", modified: "4 days ago", created: "Dec 5, 2024", icon: Image01Icon, color: "text-purple-400" },
+];
+
+function FileCard({ name, size, modified, icon: Icon, color }: any) {
+    return (
+        <div className="bg-[#0A0A0B] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 hover:bg-zinc-900 transition-colors group cursor-pointer relative shadow-sm">
+            <div className="flex items-start justify-between relative z-10">
+                <div className={cn("p-2 rounded-lg bg-zinc-900/50 border border-zinc-800/50", color.replace('text-', 'bg-').replace('400', '500/10'))}>
+                    <HugeiconsIcon icon={Icon} className={cn("size-6 transition-colors", color)} />
+                </div>
+                <DropdownMenu>
+                    <DropdownMenuTrigger onClick={(e) => e.preventDefault()} className="text-zinc-500 hover:text-zinc-300 transition-colors p-1 -mr-2 -mt-2 cursor-pointer relative">
+                        <HugeiconsIcon icon={MoreVerticalIcon} className="size-4" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent onClick={(e) => e.preventDefault()} align="end" className="w-48 bg-zinc-900 border-zinc-800">
+                        <DropdownMenuItem className="text-zinc-300 focus:bg-zinc-800 focus:text-zinc-100 gap-2 cursor-pointer">
+                            <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />
+                            Open
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-zinc-300 focus:bg-zinc-800 focus:text-zinc-100 gap-2 cursor-pointer">
+                            <HugeiconsIcon icon={Share05Icon} className="size-4" />
+                            Share
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-zinc-300 focus:bg-zinc-800 focus:text-zinc-100 gap-2 cursor-pointer">
+                            <HugeiconsIcon icon={Edit02Icon} className="size-4" />
+                            Rename
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-red-400 focus:bg-red-500/10 focus:text-red-400 gap-2 cursor-pointer">
+                            <HugeiconsIcon icon={Delete01Icon} className="size-4" />
+                            Delete
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
+            <div className="mt-1">
+                <div className="font-medium text-[13px] text-zinc-200 truncate leading-snug">{name}</div>
+                <div className="text-[11px] text-zinc-500 mt-0.5">{size} • {modified}</div>
             </div>
         </div>
     );
