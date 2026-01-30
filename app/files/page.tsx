@@ -508,16 +508,16 @@ export default function FilesPage() {
 
 function StorageCard({ icon: Icon, label, amount, percentage, color, bg, barColor }: any) {
     return (
-        <div className="bg-[#0A0A0B] border border-zinc-800 rounded-2xl p-4 flex flex-col gap-3 hover:bg-zinc-900 transition-colors shadow-sm">
-            <div className={cn("size-10 rounded-lg flex items-center justify-center border border-zinc-800/50", bg, color)}>
-                <HugeiconsIcon icon={Icon} className="size-5" />
+        <div className="bg-[#0A0A0B] border border-zinc-800 rounded-2xl p-3 flex flex-col gap-2 hover:bg-zinc-900 transition-colors shadow-sm">
+            <div className={cn("size-8 rounded-lg flex items-center justify-center border border-zinc-800/50", bg, color)}>
+                <HugeiconsIcon icon={Icon} className="size-4" />
             </div>
             <div>
-                <div className="font-medium text-sm text-zinc-200">{label}</div>
-                <div className="text-xs text-zinc-500 mt-0.5">{amount}</div>
+                <div className="font-medium text-[13px] text-zinc-200">{label}</div>
+                <div className="text-[11px] text-zinc-500 mt-0.5">{amount}</div>
             </div>
-            <div className="mt-auto pt-2">
-                <div className="flex justify-between text-[10px] text-zinc-500 mb-2">
+            <div className="mt-auto pt-1">
+                <div className="flex justify-between text-[10px] text-zinc-500 mb-1.5">
                     <span>Used</span>
                     <span>{percentage}%</span>
                 </div>
