@@ -3,9 +3,8 @@
 import Link from "next/link";
 
 import { AppHeader } from "@/components/app-header";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { CalendarSidebar } from "@/components/calendar/calendar-sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
@@ -159,183 +158,178 @@ export default function FilesPage() {
     };
 
     return (
-        <SidebarProvider>
-            <CalendarSidebar />
-            <SidebarInset>
-                <div className="flex flex-col h-svh overflow-hidden bg-background text-foreground font-sans">
-                    {/* Header - Full Width */}
-                    <AppHeader
-                        showNotifications={false}
-                        showSignIn={false}
-                        className="py-5 md:py-5"
-                        breadcrumbs={
-                            <div className="flex-1 min-w-0">
-                                <h1 className="text-xl font-semibold tracking-tight text-foreground">My Files</h1>
-                                <p className="text-muted-foreground text-xs">Manage your documents and assets.</p>
-                            </div>
-                        }
-                    >
-                        <div className="relative hidden md:block group">
-                            <HugeiconsIcon icon={Search01Icon} className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-                            <Input
-                                placeholder="Search files..."
-                                className="pl-9 bg-muted/50 border-input text-foreground placeholder:text-muted-foreground w-64 focus-visible:ring-ring h-9 transition-colors group-hover:border-accent"
+        <div className="flex flex-col h-svh overflow-hidden bg-background text-foreground font-sans">
+            {/* Header - Full Width */}
+            <AppHeader
+                showNotifications={false}
+                showSignIn={false}
+                className="py-5 md:py-5"
+                breadcrumbs={
+                    <div className="flex-1 min-w-0">
+                        <h1 className="text-xl font-semibold tracking-tight text-foreground">My Files</h1>
+                        <p className="text-muted-foreground text-xs">Manage your documents and assets.</p>
+                    </div>
+                }
+            >
+                <div className="relative hidden md:block group">
+                    <HugeiconsIcon icon={Search01Icon} className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                    <Input
+                        placeholder="Search files..."
+                        className="pl-9 bg-muted/50 border-input text-foreground placeholder:text-muted-foreground w-64 focus-visible:ring-ring h-9 transition-colors group-hover:border-accent"
+                    />
+                </div>
+                <div className="flex items-center gap-2">
+                    <div className="flex items-center bg-muted/50 border border-input rounded-lg p-1 gap-1">
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className={cn("size-7 rounded-md hover:bg-background hover:text-foreground", viewMode === 'grid' ? "bg-background text-foreground shadow-sm" : "text-muted-foreground")}
+                            onClick={() => setViewMode('grid')}
+                        >
+                            <HugeiconsIcon icon={GridViewIcon} className="size-4" />
+                        </Button>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className={cn("size-7 rounded-md hover:bg-background hover:text-foreground", viewMode === 'list' ? "bg-background text-foreground shadow-sm" : "text-muted-foreground")}
+                            onClick={() => setViewMode('list')}
+                        >
+                            <HugeiconsIcon icon={FilterHorizontalIcon} className="size-4" />
+                        </Button>
+                    </div>
+                    <Button className="hidden md:flex gap-2 h-10 px-6 font-medium shadow-sm transition-all  active:scale-95 cursor-pointer">
+                        <HugeiconsIcon icon={Upload02Icon} className="size-4" />
+                        Upload
+                    </Button>
+                </div>
+            </AppHeader>
+
+            {/* Main Container - Split View on Desktop */}
+            <div className="flex flex-1 overflow-hidden">
+
+                {/* Left Column - Main Content */}
+                <div className="flex-1 flex flex-col min-w-0 overflow-y-auto p-6 md:p-8 space-y-8">
+
+                    {/* Header */}
+                    {/* Header */}
+
+
+
+
+                    {/* Storage Categories */}
+                    <section>
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                            <StorageCard
+                                icon={Image01Icon}
+                                label="Images"
+                                amount="2.4 GB"
+                                percentage={16}
+                                color="text-purple-400"
+                                bg="bg-purple-500/10"
+                                barColor="bg-purple-500"
+                            />
+                            <StorageCard
+                                icon={VideoReplayIcon}
+                                label="Videos"
+                                amount="3.2 GB"
+                                percentage={21}
+                                color="text-pink-400"
+                                bg="bg-pink-500/10"
+                                barColor="bg-pink-500"
+                            />
+                            <StorageCard
+                                icon={File01Icon}
+                                label="Documents"
+                                amount="1.5 GB"
+                                percentage={10}
+                                color="text-orange-400"
+                                bg="bg-orange-500/10"
+                                barColor="bg-orange-500"
+                            />
+                            <StorageCard
+                                icon={ArchiveIcon}
+                                label="Archives"
+                                amount="1.2 GB"
+                                percentage={8}
+                                color="text-emerald-400"
+                                bg="bg-emerald-500/10"
+                                barColor="bg-emerald-500"
                             />
                         </div>
-                        <div className="flex items-center gap-2">
-                            <div className="flex items-center bg-muted/50 border border-input rounded-lg p-1 gap-1">
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className={cn("size-7 rounded-md hover:bg-background hover:text-foreground", viewMode === 'grid' ? "bg-background text-foreground shadow-sm" : "text-muted-foreground")}
-                                    onClick={() => setViewMode('grid')}
-                                >
-                                    <HugeiconsIcon icon={GridViewIcon} className="size-4" />
-                                </Button>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className={cn("size-7 rounded-md hover:bg-background hover:text-foreground", viewMode === 'list' ? "bg-background text-foreground shadow-sm" : "text-muted-foreground")}
-                                    onClick={() => setViewMode('list')}
-                                >
-                                    <HugeiconsIcon icon={FilterHorizontalIcon} className="size-4" />
-                                </Button>
-                            </div>
-                            <Button className="hidden md:flex gap-2 h-10 px-6 font-medium shadow-sm transition-all  active:scale-95 cursor-pointer">
-                                <HugeiconsIcon icon={Upload02Icon} className="size-4" />
-                                Upload
+                    </section>
+
+                    {/* Folders */}
+                    <section>
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-lg font-medium text-muted-foreground">Folders</h2>
+                            <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-7 text-xs text-muted-foreground hover:text-foreground gap-2"
+                                onClick={() => setIsCreateOpen(true)}
+                            >
+                                <HugeiconsIcon icon={FolderAddIcon} className="size-4" />
+                                New Folder
                             </Button>
                         </div>
-                    </AppHeader>
-
-                    {/* Main Container - Split View on Desktop */}
-                    <div className="flex flex-1 overflow-hidden">
-
-                        {/* Left Column - Main Content */}
-                        <div className="flex-1 flex flex-col min-w-0 overflow-y-auto p-6 md:p-8 space-y-8">
-
-                            {/* Header */}
-                            {/* Header */}
-
-
-
-
-                            {/* Storage Categories */}
-                            <section>
-                                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                                    <StorageCard
-                                        icon={Image01Icon}
-                                        label="Images"
-                                        amount="2.4 GB"
-                                        percentage={16}
-                                        color="text-purple-400"
-                                        bg="bg-purple-500/10"
-                                        barColor="bg-purple-500"
-                                    />
-                                    <StorageCard
-                                        icon={VideoReplayIcon}
-                                        label="Videos"
-                                        amount="3.2 GB"
-                                        percentage={21}
-                                        color="text-pink-400"
-                                        bg="bg-pink-500/10"
-                                        barColor="bg-pink-500"
-                                    />
-                                    <StorageCard
-                                        icon={File01Icon}
-                                        label="Documents"
-                                        amount="1.5 GB"
-                                        percentage={10}
-                                        color="text-orange-400"
-                                        bg="bg-orange-500/10"
-                                        barColor="bg-orange-500"
-                                    />
-                                    <StorageCard
-                                        icon={ArchiveIcon}
-                                        label="Archives"
-                                        amount="1.2 GB"
-                                        percentage={8}
-                                        color="text-emerald-400"
-                                        bg="bg-emerald-500/10"
-                                        barColor="bg-emerald-500"
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                            {folders.map((folder) => (
+                                <div key={folder.id} className="contents">
+                                    {/* We wrap in contents div to keep key on element but preserve grid layout if needed, though Link is better wrapper */}
+                                    <FolderCard
+                                        folder={folder}
+                                        onDelete={() => handleDeleteFolder(folder.id)}
+                                        onRename={() => openRenameDialog(folder)}
                                     />
                                 </div>
-                            </section>
+                            ))}
+                        </div>
+                    </section>
 
-                            {/* Folders */}
-                            <section>
-                                <div className="flex items-center justify-between mb-4">
-                                    <h2 className="text-lg font-medium text-muted-foreground">Folders</h2>
-                                    <Button
-                                        size="sm"
-                                        variant="ghost"
-                                        className="h-7 text-xs text-muted-foreground hover:text-foreground gap-2"
-                                        onClick={() => setIsCreateOpen(true)}
-                                    >
-                                        <HugeiconsIcon icon={FolderAddIcon} className="size-4" />
-                                        New Folder
-                                    </Button>
+                    {/* Recent Files */}
+                    <section className="flex-1">
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-lg font-medium text-muted-foreground">All Files</h2>
+                        </div>
+                        {viewMode === 'list' ? (
+                            <div className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm">
+                                <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-4 p-4 text-xs font-medium text-muted-foreground border-b border-border uppercase tracking-wider">
+                                    <div className="w-8"></div>
+                                    <div>Name</div>
+                                    <div className="w-24 text-right">Size</div>
+                                    <div className="w-32 text-right">Modified</div>
+                                    <div className="w-32 text-right">Created</div>
+                                    <div className="w-10"></div>
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                                    {folders.map((folder) => (
-                                        <div key={folder.id} className="contents">
-                                            {/* We wrap in contents div to keep key on element but preserve grid layout if needed, though Link is better wrapper */}
-                                            <FolderCard
-                                                folder={folder}
-                                                onDelete={() => handleDeleteFolder(folder.id)}
-                                                onRename={() => openRenameDialog(folder)}
-                                            />
-                                        </div>
+                                <div className="divide-y divide-border">
+                                    {ALL_FILES.map((file, i) => (
+                                        <FileRow key={i} {...file} />
                                     ))}
                                 </div>
-                            </section>
-
-                            {/* Recent Files */}
-                            <section className="flex-1">
-                                <div className="flex items-center justify-between mb-4">
-                                    <h2 className="text-lg font-medium text-muted-foreground">All Files</h2>
-                                </div>
-                                {viewMode === 'list' ? (
-                                    <div className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm">
-                                        <div className="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-4 p-4 text-xs font-medium text-muted-foreground border-b border-border uppercase tracking-wider">
-                                            <div className="w-8"></div>
-                                            <div>Name</div>
-                                            <div className="w-24 text-right">Size</div>
-                                            <div className="w-32 text-right">Modified</div>
-                                            <div className="w-32 text-right">Created</div>
-                                            <div className="w-10"></div>
-                                        </div>
-                                        <div className="divide-y divide-border">
-                                            {ALL_FILES.map((file, i) => (
-                                                <FileRow key={i} {...file} />
-                                            ))}
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                                        {ALL_FILES.map((file, i) => (
-                                            <FileCard key={i} {...file} />
-                                        ))}
-                                    </div>
-                                )}
-                            </section>
-                        </div>
-
-                        {/* Right Panel - Info */}
-                        <div className="w-96 border-l border-border bg-muted/10 hidden xl:flex flex-col p-6 space-y-6 overflow-y-auto">
-
-                            {/* Storage Overview Card */}
-                            <StorageOverview />
-
-                            {/* Team Members Card */}
-                            <TeamMembers members={teamMembers} onAddMember={() => setIsAddMemberOpen(true)} />
-
-                            {/* Recent Activity Card */}
-                            <RecentActivity />
-                        </div>
-                    </div>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                                {ALL_FILES.map((file, i) => (
+                                    <FileCard key={i} {...file} />
+                                ))}
+                            </div>
+                        )}
+                    </section>
                 </div>
-            </SidebarInset>
+
+                {/* Right Panel - Info */}
+                <div className="w-96 border-l border-border bg-muted/10 hidden xl:flex flex-col p-6 space-y-6 overflow-y-auto">
+
+                    {/* Storage Overview Card */}
+                    <StorageOverview />
+
+                    {/* Team Members Card */}
+                    <TeamMembers members={teamMembers} onAddMember={() => setIsAddMemberOpen(true)} />
+
+                    {/* Recent Activity Card */}
+                    <RecentActivity />
+                </div>
+            </div>
 
             {/* Create Folder Dialog */}
             <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
@@ -434,7 +428,7 @@ export default function FilesPage() {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </SidebarProvider>
+        </div>
     );
 }
 
